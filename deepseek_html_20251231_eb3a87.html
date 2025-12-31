@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Learn how to start earning online even if you have no skills, no money, and no experience. Get our e-book for only ₹49.">
+  <title>From Zero to Online Income | ₹49 Only</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --primary-dark: #4338ca;
+      --secondary: #22c55e;
+      --secondary-dark: #16a34a;
+      --light: #f5f7fb;
+      --dark: #1f2937;
+      --gray: #6b7280;
+      --white: #ffffff;
+      --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --radius: 12px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      margin-bottom: 20px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .logo span {
+      color: var(--secondary);
+    }
+
+    .tagline {
+      font-size: 14px;
+      color: var(--gray);
+      font-weight: 500;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, var(--primary), #6366f1);
+      color: var(--white);
+      padding: 60px 30px;
+      border-radius: var(--radius);
+      text-align: center;
+      margin-bottom: 30px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200px;
+      height: 200px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 150px;
+      height: 150px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 50%;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 15px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero p {
+      font-size: 18px;
+      margin-bottom: 25px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .price-container {
+      display: inline-flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 25px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .price {
+      font-size: 32px;
+      font-weight: bold;
+    }
+
+    .old-price {
+      font-size: 20px;
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: line-through;
+    }
+
+    .discount-badge {
+      background: var(--secondary);
+      color: white;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px 32px;
+      background: var(--secondary);
+      color: var(--white);
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: 600;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn:hover {
+      background: var(--secondary-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-large {
+      padding: 18px 40px;
+      font-size: 20px;
+    }
+
+    /* Sections */
+    .section {
+      background: var(--white);
+      margin-top: 30px;
+      padding: 30px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .section h2 {
+      margin-bottom: 20px;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section h2 i {
+      font-size: 24px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .feature-card {
+      background: #f8fafc;
+      padding: 20px;
+      border-radius: 10px;
+      border-left: 4px solid var(--primary);
+    }
+
+    .feature-card h3 {
+      color: var(--primary-dark);
+      margin-bottom: 10px;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    ul li {
+      margin-bottom: 10px;
+      font-size: 16px;
+      position: relative;
+    }
+
+    ul li:before {
+      content: "✓";
+      color: var(--secondary);
+      font-weight: bold;
+      position: absolute;
+      left: -20px;
+    }
+
+    /* Testimonials */
+    .testimonials {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      padding: 10px 0;
+      margin-top: 20px;
+    }
+
+    .testimonial {
+      min-width: 280px;
+      background: #f8fafc;
+      padding: 20px;
+      border-radius: 10px;
+      border: 1px solid #e5e7eb;
+    }
+
+    .testimonial p {
+      font-style: italic;
+      margin-bottom: 15px;
+    }
+
+    .testimonial-author {
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    /* FAQ */
+    .faq-item {
+      margin-bottom: 15px;
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 15px;
+    }
+
+    .faq-question {
+      font-weight: 600;
+      color: var(--dark);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-answer {
+      margin-top: 10px;
+      color: var(--gray);
+      display: none;
+    }
+
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+
+    /* Guarantee */
+    .guarantee {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      background: #f0f9ff;
+      padding: 20px;
+      border-radius: var(--radius);
+      margin-top: 20px;
+      border: 1px solid #bae6fd;
+    }
+
+    .guarantee i {
+      font-size: 40px;
+      color: var(--secondary);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      margin: 40px 0 20px;
+      padding-top: 20px;
+      border-top: 1px solid #e5e7eb;
+      color: var(--gray);
+      font-size: 14px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 28px;
+      }
+      
+      .hero p {
+        font-size: 16px;
+      }
+      
+      .price-container {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      header {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero {
+        padding: 40px 20px;
+      }
+      
+      .section {
+        padding: 20px;
+      }
+      
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    
+    <!-- Header -->
+    <header>
+      <div>
+        <div class="logo">Zero<span>Income</span></div>
+        <div class="tagline">Start your online income journey today</div>
+      </div>
+      <div class="price-container">
+        <div class="price">₹49</div>
+        <div class="discount-badge">Limited Time Offer</div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <h1>From Zero to Online Income</h1>
+      <p>Learn how to start earning online even if you have no skills, no money, and no experience. Perfect for complete beginners.</p>
+      
+      <div class="price-container">
+        <div class="old-price">₹299</div>
+        <div class="price">₹49 Only</div>
+        <div class="discount-badge">83% OFF</div>
+      </div>
+      
+      <a href="https://forms.gle/t3CCRC4xVA5nUWHP9" target="_blank" class="btn btn-large">
+        <i class="fas fa-shopping-cart"></i>
+        Buy Now & Start Learning
+      </a>
+      
+      <p style="margin-top: 15px; font-size: 14px;">30-Day Money Back Guarantee</p>
+    </section>
+
+    <!-- What You'll Learn -->
+    <section class="section">
+      <h2><i class="fas fa-book-open"></i> What You Will Learn</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>Beginner-Friendly Methods</h3>
+          <p>Step-by-step guides for online earning methods that require zero investment and minimal technical skills.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Free Tools & Platforms</h3>
+          <p>Discover free tools and platforms you can use to start earning immediately without spending money.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Common Mistakes to Avoid</h3>
+          <p>Learn from others' mistakes so you don't waste time on methods that don't work for beginners.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Who Is This For -->
+    <section class="section">
+      <h2><i class="fas fa-users"></i> Who Is This E-Book For?</h2>
+      <ul>
+        <li>Students looking to earn extra income</li>
+        <li>Beginners with no technical skills or experience</li>
+        <li>Anyone wanting to build a side income stream</li>
+        <li>People tired of scams searching for genuine online work</li>
+        <li>Stay-at-home parents wanting to contribute to family income</li>
+        <li>Retirees looking for flexible earning opportunities</li>
+      </ul>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section">
+      <h2><i class="fas fa-star"></i> What Readers Say</h2>
+      <div class="testimonials">
+        <div class="testimonial">
+          <p>"I started earning ₹5000/month within 2 weeks of reading this book. The methods are simple and actually work!"</p>
+          <div class="testimonial-author">- Rohan S., Student</div>
+        </div>
+        <div class="testimonial">
+          <p>"As a complete beginner, I was skeptical. But this book broke down everything so simply. Highly recommend!"</p>
+          <div class="testimonial-author">- Priya M., Homemaker</div>
+        </div>
+        <div class="testimonial">
+          <p>"Best ₹49 I ever spent! The content is practical and the step-by-step approach made it easy to follow."</p>
+          <div class="testimonial-author">- Ankit T., Freelancer</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section">
+      <h2><i class="fas fa-question-circle"></i> Frequently Asked Questions</h2>
+      <div class="faq-item">
+        <div class="faq-question">
+          Do I need any money to start?
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">No! All methods in the book require zero investment. We focus on using free tools and platforms.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">
+          What format will I receive the book in?
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">You'll receive the e-book in PDF format, which you can read on any device - phone, tablet, or computer.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">
+          Is there a money-back guarantee?
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">Yes! If you're not satisfied with the e-book, you can request a full refund within 30 days of purchase.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">
+          How soon will I receive the e-book?
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">Immediately after payment! You'll get instant access to download the e-book.</div>
+      </div>
+    </section>
+
+    <!-- Guarantee -->
+    <div class="guarantee">
+      <i class="fas fa-shield-alt"></i>
+      <div>
+        <h3>30-Day Money Back Guarantee</h3>
+        <p>If you're not satisfied with the e-book, we'll refund your money. No questions asked.</p>
+      </div>
+    </div>
+
+    <!-- Final CTA -->
+    <section class="hero" style="margin-top: 30px;">
+      <h2>Start Your Online Income Journey Today</h2>
+      <p>Don't wait for the "perfect time". Start now and take control of your financial future.</p>
+      <div class="price-container">
+        <div class="old-price">₹299</div>
+        <div class="price">₹49 Only</div>
+      </div>
+      <a href="https://forms.gle/t3CCRC4xVA5nUWHP9" target="_blank" class="btn btn-large">
+        <i class="fas fa-download"></i>
+        Download Now & Start Earning
+      </a>
+      <p style="margin-top: 15px; font-size: 14px;">One-time payment. Lifetime access.</p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>© 2025 | From Zero to Online Income | All Rights Reserved</p>
+      <p style="margin-top: 5px;">Contact: support@zeroincome.com | This is not a get-rich-quick scheme. Results require effort.</p>
+    </footer>
+
+  </div>
+
+  <script>
+    // FAQ toggle functionality
+    document.querySelectorAll('.faq-question').forEach(question => {
+      question.addEventListener('click', () => {
+        const faqItem = question.parentElement;
+        faqItem.classList.toggle('active');
+        
+        // Rotate chevron icon
+        const icon = question.querySelector('i');
+        if (faqItem.classList.contains('active')) {
+          icon.style.transform = 'rotate(180deg)';
+        } else {
+          icon.style.transform = 'rotate(0deg)';
+        }
+      });
+    });
+
+    // Track button clicks for analytics (optional)
+    document.querySelectorAll('.btn').forEach(button => {
+      button.addEventListener('click', () => {
+        // You can add analytics tracking here
+        console.log('Button clicked, redirecting to Google Form');
+        
+        // Optional: Add a slight delay for better UX
+        setTimeout(() => {
+          // The actual redirect happens via the href attribute
+        }, 100);
+      });
+    });
+
+    // Optional: Add a confirmation message before redirect
+    document.querySelectorAll('.btn-large').forEach(button => {
+      button.addEventListener('click', (e) => {
+        // Optional: You can add a confirmation here if needed
+        // const confirmed = confirm("You'll be redirected to the payment form. Continue?");
+        // if (!confirmed) {
+        //   e.preventDefault();
+        // }
+      });
+    });
+  </script>
+</body>
+</html>
