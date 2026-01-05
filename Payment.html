@@ -1,30 +1,38 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html>
 <head>
   <meta charset="UTF-8">
-  <title>UPI Payment</title>
+  <title>Pay ₹49</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<body style="font-family:Arial;text-align:center;padding-top:50px;">
+<body style="font-family:Arial;text-align:center;padding-top:60px;">
 
-<h3>Redirecting to UPI Payment…</h3>
-<p>Amount: ₹49</p>
+  <button onclick="payNow()"
+    style="
+      padding:15px 35px;
+      font-size:20px;
+      background:#0a7cff;
+      color:white;
+      border:none;
+      border-radius:8px;
+      cursor:pointer;
+    ">
+    Pay ₹49
+  </button>
 
 <script>
-  const upiId = "9382658846@naviax";
-  const amount = "49";
-
+function payNow() {
   const upiURL =
     "upi://pay" +
-    "?pa=" + encodeURIComponent(upiId) +
+    "?pa=9382658846@naviax" +
     "&pn=Payment" +
-    "&am=" + amount +
+    "&am=49" +
     "&cu=INR" +
-    "&tn=Payment%2049";
+    "&tn=Payment49";
 
-  // auto open UPI app
   window.location.href = upiURL;
+}
 </script>
 
 </body>
