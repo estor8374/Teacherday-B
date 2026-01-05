@@ -6,32 +6,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<body style="font-family:Arial;text-align:center;padding-top:60px;">
+<body style="font-family:Arial;text-align:center;padding-top:70px;">
 
-  <button onclick="payNow()"
-    style="
-      padding:15px 35px;
-      font-size:20px;
-      background:#0a7cff;
-      color:white;
-      border:none;
-      border-radius:8px;
-      cursor:pointer;
-    ">
-    Pay ₹49
-  </button>
+<button onclick="payAll()"
+style="
+  padding:16px 40px;
+  font-size:20px;
+  background:#0a7cff;
+  color:white;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+">
+Pay ₹49
+</button>
 
 <script>
-function payNow() {
-  const upiURL =
-    "upi://pay" +
-    "?pa=9382658846@naviax" +
-    "&pn=Payment" +
-    "&am=49" +
-    "&cu=INR" +
-    "&tn=Payment49";
+function payAll() {
+  const upiId = "9382658846@naviax";
+  const amount = "49";
 
-  window.location.href = upiURL;
+  // 1️⃣ Try PhonePe first
+  const phonePeIntent =
+    "intent://pay?pa=" + upiId +
+    "&pn=Payment&am=" + amount +
+    "&cu=INR&tn=Payment49" +
+    "#Intent;scheme=upi;package=com.phonepe.app;end";
+
+  // 2️⃣ Normal UPI fallback (GPay / Paytm / BHIM)
+  const normalUPI =
+    "upi://pay?pa=" + upiId +
+    "&pn=Payment&am=" + amount +
+    "&cu=INR&tn=Payment49";
+
+  // Try PhonePe
+  window.location.href = phonePeIntent;
+
+  // Fallback after 1 second
+  setTimeout(() => {
+    window.location.href = normalUPI;
+  }, 1000);
 }
 </script>
 
