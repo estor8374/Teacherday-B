@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protected Content - No Screenshots or Copying</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #1a2a3a 0%, #0d1520 100%);
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .protection-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            pointer-events: none;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 1px,
+                rgba(255, 255, 255, 0.05) 1px,
+                rgba(255, 255, 255, 0.05) 2px
+            );
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #eaeaea;
+            position: relative;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+        
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.2rem;
+        }
+        
+        .warning-banner {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border-left: 5px solid #f5c6cb;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+        }
+        
+        .warning-banner svg {
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+        
+        .content {
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 5;
+        }
+        
+        .content p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            position: relative;
+            padding: 5px;
+        }
+        
+        .content p::selection {
+            background: transparent;
+        }
+        
+        .content p::-moz-selection {
+            background: transparent;
+        }
+        
+        .protected-text {
+            font-family: 'Georgia', serif;
+            font-size: 1.15rem;
+            background-color: rgba(245, 245, 245, 0.7);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px dashed #ccc;
+        }
+        
+        .security-features {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .security-features h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .security-features ul {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .security-features li {
+            margin-bottom: 8px;
+            padding-left: 5px;
+        }
+        
+        .disclaimer {
+            background-color: #e9f7fe;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 25px;
+            border-left: 5px solid #3498db;
+            font-size: 0.95rem;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eaeaea;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        .protection-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(231, 76, 60, 0.9);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            display: none;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        .invisible-watermark {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="100" opacity="0.02"><text x="10" y="50" font-family="Arial" font-size="14" fill="red">Protected Content - Do Not Share</text></svg>');
+            background-repeat: repeat;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 20px auto;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Invisible watermark overlay -->
+    <div class="invisible-watermark"></div>
+    
+    <!-- Protection alert message -->
+    <div class="protection-message" id="protectionAlert">
+        Protection Activated: Screenshot Attempt Detected
+    </div>
+    
+    <div class="container">
+        <div class="protection-overlay"></div>
+        
+        <header>
+            <h1>Protected Content</h1>
+            <p class="subtitle">This page uses multiple techniques to prevent screenshots and text copying</p>
+        </header>
+        
+        <div class="warning-banner">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
+            </svg>
+            <div>
+                <strong>Warning:</strong> This page employs multiple protection mechanisms. Copying text or taking screenshots is restricted.
+            </div>
+        </div>
+        
+        <div class="content">
+            <h2>Confidential Document</h2>
+            <p>This document contains proprietary information that is protected by copyright and intellectual property laws. Unauthorized duplication, distribution, or sharing of this content is strictly prohibited.</p>
+            
+            <div class="protected-text">
+                <h3>Proprietary Research Summary</h3>
+                <p>The latest findings from our confidential research indicate a breakthrough in quantum-resistant encryption algorithms. Our team has developed a novel approach to lattice-based cryptography that reduces key sizes by approximately 40% while maintaining equivalent security levels to current NIST standards.</p>
+                
+                <p>The algorithm, internally designated "QR-Shield v2.3," utilizes a multi-dimensional polynomial ring structure that enables faster computation times without compromising post-quantum security guarantees. Initial benchmarks show a 22% improvement in encryption/decryption speeds compared to leading alternatives like CRYSTALS-Kyber.</p>
+                
+                <p>This technology represents a significant advancement in securing communications against future quantum computing threats. Implementation details, mathematical proofs, and performance metrics are documented in the restricted technical specification (Document #QR-2847-A), accessible only to authorized personnel with Level 4 clearance or higher.</p>
+                
+                <p>All findings in this document are classified as "Company Confidential - Level 3" under corporate security policy CSP-2023-08. Distribution outside authorized channels may result in legal action under the Uniform Trade Secrets Act and applicable international intellectual property laws.</p>
+            </div>
+        </div>
+        
+        <div class="security-features">
+            <h3>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 10px;">
+                    <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+                </svg>
+                Active Protection Mechanisms
+            </h3>
+            <ul>
+                <li><strong>Text Selection Blocked:</strong> User cannot select text with mouse or keyboard</li>
+                <li><strong>Right-Click Disabled:</strong> Context menu is disabled to prevent copy options</li>
+                <li><strong>Print Screen Detection:</strong> Attempts to capture screenshots trigger alerts</li>
+                <li><strong>Invisible Watermarking:</strong> Hidden markers identify content source</li>
+                <li><strong>Clipboard Protection:</strong> Copy commands are intercepted and blocked</li>
+                <li><strong>Developer Tools Detection:</strong> Opening DevTools triggers protective measures</li>
+                <li><strong>Overlay Protection:</strong> Visual interference patterns deter screenshots</li>
+            </ul>
+            <p><em>Note: These protections work at the browser level but cannot prevent hardware-level capture methods.</em></p>
+        </div>
+        
+        <div class="disclaimer">
+            <strong>Disclaimer:</strong> Complete protection against all screenshot and copying methods is technically impossible. Determined users can bypass browser-level protections using external tools, screen capture hardware, or photography. These measures are designed to discourage casual copying and raise awareness about content protection.
+        </div>
+        
+        <footer>
+            <p>© 2023 Secure Content Protection System. All rights reserved.</p>
+            <p>This content is protected by intellectual property laws and technological protection measures.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Block text selection
+        document.addEventListener('selectstart', function(e) {
+            e.preventDefault();
+            showProtectionAlert("Text selection blocked");
+        });
+        
+        // Block right-click context menu
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            showProtectionAlert("Right-click menu disabled");
+        });
+        
+        // Block copy/cut/paste events
+        document.addEventListener('copy', function(e) {
+            e.preventDefault();
+            showProtectionAlert("Copying is disabled");
+        });
+        
+        document.addEventListener('cut', function(e) {
+            e.preventDefault();
+            showProtectionAlert("Cutting is disabled");
+        });
+        
+        document.addEventListener('paste', function(e) {
+            e.preventDefault();
+            showProtectionAlert("Pasting is disabled");
+        });
+        
+        // Detect Print Screen key and other screenshot shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Print Screen key
+            if (e.key === 'PrintScreen') {
+                e.preventDefault();
+                showProtectionAlert("Screenshot attempt detected");
+                // Try to clear clipboard
+                clearClipboard();
+            }
+            
+            // Alt + Print Screen (Windows) or Cmd+Shift+3/4 (Mac) detection
+            if ((e.altKey && e.key === 'PrintScreen') || 
+                (e.metaKey && e.shiftKey && (e.key === '3' || e.key === '4'))) {
+                e.preventDefault();
+                showProtectionAlert("Screenshot shortcut disabled");
+                clearClipboard();
+            }
+            
+            // Ctrl+C, Ctrl+X, Ctrl+V
+            if (e.ctrlKey && (e.key === 'c' || e.key === 'x' || e.key === 'v')) {
+                e.preventDefault();
+                showProtectionAlert("Copy/paste shortcuts disabled");
+            }
+            
+            // Disable F12 (DevTools) and Ctrl+Shift+I/Ctrl+Shift+J
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J'))) {
+                e.preventDefault();
+                showProtectionAlert("Developer tools access restricted");
+                // Redirect or show warning
+                document.body.innerHTML = '<div style="padding: 50px; text-align: center;"><h2>Access Restricted</h2><p>Developer tools have been disabled on this protected page.</p><p><a href="#" onclick="location.reload()">Return to page</a></p></div>';
+            }
+        });
+        
+        // Detect if DevTools is opened by checking window dimensions
+        let devToolsOpen = false;
+        
+        function checkDevTools() {
+            const widthThreshold = window.outerWidth - window.innerWidth > 160;
+            const heightThreshold = window.outerHeight - window.innerHeight > 160;
+            
+            if (widthThreshold || heightThreshold) {
+                if (!devToolsOpen) {
+                    devToolsOpen = true;
+                    showProtectionAlert("Developer tools detected");
+                    // Apply visual distortion when DevTools is open
+                    document.body.style.filter = 'blur(5px)';
+                }
+            } else {
+                if (devToolsOpen) {
+                    devToolsOpen = false;
+                    document.body.style.filter = 'none';
+                }
+            }
+        }
+        
+        setInterval(checkDevTools, 1000);
+        
+        // Attempt to clear clipboard (limited browser support)
+        function clearClipboard() {
+            navigator.clipboard.writeText('[Protected Content - Copying Disabled]').catch(() => {
+                // Clipboard API not available or permission denied
+            });
+        }
+        
+        // Show protection alert message
+        function showProtectionAlert(message) {
+            const alert = document.getElementById('protectionAlert');
+            alert.textContent = `Protection Activated: ${message}`;
+            alert.style.display = 'block';
+            
+            // Hide after 3 seconds
+            setTimeout(() => {
+                alert.style.display = 'none';
+            }, 3000);
+        }
+        
+        // Add additional overlay when user tries to drag (for screenshot tools)
+        document.addEventListener('mousedown', function(e) {
+            if (e.button === 0) { // Left click
+                // Check if this might be a screenshot selection drag
+                setTimeout(() => {
+                    // Add temporary overlay during potential screenshot operations
+                    const overlay = document.createElement('div');
+                    overlay.style.position = 'fixed';
+                    overlay.style.top = '0';
+                    overlay.style.left = '0';
+                    overlay.style.width = '100%';
+                    overlay.style.height = '100%';
+                    overlay.style.backgroundColor = 'rgba(255, 0, 0, 0.03)';
+                    overlay.style.zIndex = '99999';
+                    overlay.style.pointerEvents = 'none';
+                    overlay.id = 'screenshot-protect-overlay';
+                    
+                    document.body.appendChild(overlay);
+                    
+                    setTimeout(() => {
+                        const overlayEl = document.getElementById('screenshot-protect-overlay');
+                        if (overlayEl) {
+                            overlayEl.remove();
+                        }
+                    }, 500);
+                }, 10);
+            }
+        });
+        
+        // Block drag and drop of images
+        document.addEventListener('dragstart', function(e) {
+            if (e.target.tagName === 'IMG') {
+                e.preventDefault();
+                showProtectionAlert("Image dragging disabled");
+            }
+        });
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Try to clear clipboard on page load
+            setTimeout(clearClipboard, 500);
+            
+            // Show initial protection notification
+            setTimeout(() => {
+                showProtectionAlert("Protection mechanisms activated");
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
